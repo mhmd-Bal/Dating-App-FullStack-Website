@@ -5,7 +5,7 @@
   height: 100vh;
 }
 
-.signup-form {
+.Signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,11 +15,11 @@
   background-color: #FDFDFD;
 }
 
-.signup-form label {
+.Signup-form label {
   align-self: flex-start;
 }
 
-.signup-form input {
+.Signup-form input {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -27,7 +27,7 @@
   border-radius: 5px;
 }
 
-.signup-form button {
+.Signup-form button {
   width: 50%;
   padding: 10px;
   border: none;
@@ -37,20 +37,20 @@
   cursor: pointer;
 }
 
-.signup-form button:hover {
+.Signup-form button:hover {
   background-color: var(--Primary_orange);
 }
 
-.login-link {
+.Login-link {
   margin-top: 20px;
   text-align: center;
 }
 
-.login-link a {
+.Login-link a {
   color: var(--Light_red);
   text-decoration: none;
 }
 
-.login-link a:hover {
+.Login-link a:hover {
   text-decoration: underline;
 }
