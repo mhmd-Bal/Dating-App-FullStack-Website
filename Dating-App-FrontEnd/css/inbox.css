@@ -1,0 +1,45 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.Message {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Message-header h2 {
+  margin: 0;
+}
+
+.Reply-btn {
+  background-color: var(--Primary_red);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.Reply-btn:hover {
+  background-color: var(--Primary_orange);
+}
+
+.Message:nth-child(even) {
+  background-color: #f6f6f6;
+}
