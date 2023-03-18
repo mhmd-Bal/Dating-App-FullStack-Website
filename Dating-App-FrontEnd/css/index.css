@@ -1,0 +1,34 @@
+.Parallax {
+  background-image: url("../images/Banner.jpg");
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Parallax-title{
+  color: white;
+  font-size: 6rem;
+  text-align: center;
+  text-shadow: black 0px 0px 10px;
+}
+
+.Get-started{
+  background: rgb(179,71,102);
+  background: linear-gradient(90deg, rgba(179,71,102,1) 29%, rgba(235,94,121,1) 53%, rgba(255,124,115,1) 83%);  
+  padding: 10px 100px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.Get-started a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.563rem;
+}
