@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/register.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="Logo-block">
+        <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
+      </div>
+      <ul>
+        <li><a href="login.html">Log in</a></li>
+        <li><a href="register.html">Sign up</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="Container">
+    <form class="signup-form" action="" method="post">
+        <h1>Sign Up</h1>
+        <label for="Name">Name</label>
+        <input type="text" id="Name" name="Name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+        <button type="submit">Sign Up</button>
+        <div class="login-link">
+            Already have an account? <a href="#">Log in here</a>
+        </div>
+    </form>
+  </div>
+</body>
+</html>
