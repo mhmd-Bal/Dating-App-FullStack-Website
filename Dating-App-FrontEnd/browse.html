@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Users</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/browse.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="Logo-block">
+        <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
+      </div>
+      <ul>
+        <li><a href="login.html">Log in</a></li>
+        <li><a href="register.html">Sign up</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form class="search-bar">
+      <input type="text" placeholder="Search">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <section id="browse-users">
+      <div class="filters">
+        <form>
+          <label for="age">Age:</label>
+          <input type="text" placeholder="Search">
+          <label for="location">Location:</label>
+          <select id="location" name="location">
+            <option value="all">All</option>
+            <option value="ny">New York</option>
+            <option value="la">Los Angeles</option>
+            <option value="chi">Chicago</option>
+            <option value="hou">Houston</option>
+            <option value="mia">Miami</option>
+          </select>
+          <button type="submit">Filter</button>
+        </form>
+      </div>
+      <div class="user-list">
+        <div class="user">
+          <div class="user-info">
+            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Profile Picture">
+            <h3>Jane Doe</h3>
+            <p>25</p>
+            <p>jane.doe@example.com</p>
+            <p>New York, NY</p>
+          </div>
+          <div class="user-actions">
+            <button class="favorite"><i class="far fa-heart"></i></button>
+            <button class="block"><i class="fas fa-ban"></i></button>
+            <button class="message"><i class="far fa-envelope"></i></button>
+          </div>
+        </div>
+        <div class="user">
+          <div class="user-info">
+            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Profile Picture">
+            <h3>John Smith</h3>
+            <p>32</p>
+            <p>john.smith@example.com</p>
+            <p>Los Angeles, CA</p>
+          </div>
+          <div class="user-actions">
+            <button class="favorite"><i class="far fa-heart"></i></button>
+            <button class="block"><i class="fas fa-ban"></i></button>
+            <button class="message"><i class="far fa-envelope"></i></button>
+          </div>
+        </div>
+        <div class="user">
+          <div class="user-info">
+            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Profile Picture">
+            <h3>John Smith</h3>
+            <p>32</p>
+            <p>john.smith@example.com</p>
+            <p>Los Angeles, CA</p>
+          </div>
+          <div class="user-actions">
+            <button class="favorite"><i class="far fa-heart"></i></button>
+            <button class="block"><i class="fas fa-ban"></i></button>
+            <button class="message"><i class="far fa-envelope"></i></button>
+          </div>
+        </div>
+        <div class="user">
+          <div class="user-info">
+            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Profile Picture">
+            <h3>John Smith</h3>
+            <p>32</p>
+            <p>john.smith@example.com</p>
+            <p>Los Angeles, CA</p>
+          </div>
+          <div class="user-actions">
+            <button class="favorite"><i class="far fa-heart"></i></button>
+            <button class="block"><i class="fas fa-ban"></i></button>
+            <button class="message"><i class="far fa-envelope"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://kit.fontawesome.com/fc8d13f77c.js" crossorigin="anonymous"></script>
+</body>
+</html>
