@@ -1,0 +1,31 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.Notification {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Notification-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Notification-content h3 {
+  margin: 0;
+}
+
+.Notification:nth-child(even) {
+  background-color: #f6f6f6;
+}
