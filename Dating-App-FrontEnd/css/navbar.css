@@ -1,0 +1,40 @@
+.Logo {
+  width: 150px;
+  height: 50px;
+  object-fit: cover;
+}
+
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: var(--Primary_red);
+  color: white;
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: var(--Primary_orange);
+}
