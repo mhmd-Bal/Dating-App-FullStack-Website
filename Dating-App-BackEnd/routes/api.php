@@ -36,10 +36,7 @@ Route::group(['prefix' => 'v1'], function(){
     
     });
     
-    Route::group(['prefix' => 'registration'], function() {
 
-        Route::post('/signup', [RegistrationController::class, "register"]);
-
-    });
+    Route::post('/signup', [RegistrationController::class, "register"]);
 
 });

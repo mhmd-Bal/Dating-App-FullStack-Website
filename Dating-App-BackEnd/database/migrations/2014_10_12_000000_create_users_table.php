@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('gender_id')->constrained('genders');
             $table->integer('age');
             $table->string('location');
-            $table->string('profile_picture');
+            $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
