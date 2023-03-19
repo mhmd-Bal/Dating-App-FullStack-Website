@@ -73,14 +73,42 @@ const PostLoginData = async (event, login_url) => {
   data.append('password', password);
 
   const response = await ExecutePostAPI(login_url, data);
-  console.log(response);
-  sessionStorage.setItem("token", response.data.access_token);
-  sessionStorage.setItem("token_type", response.data.token_type);
+  if(response == undefined){
+    alert("Wrong Email or Password!");
+  }else{
+    sessionStorage.setItem("token", response.data.access_token);
+    sessionStorage.setItem("token_type", response.data.token_type);
+    window.location.href = "index.html";
+  }
+}
+
+const ToggleNavbar = () => {
+  const navbar = document.getElementsByTagName("nav");
+  for(let i=0; i<navbar.length; i++){
+    navbar[i].classList.toggle("Disabled");
+  }
 }
 
 const CheckUser = async (index_url, token, token_type) => {
   const response = await ExecutePostAPI(index_url, null, token, token_type);
   console.log(response);
+  if(response != undefined){
+    const buttons = document.getElementsByClassName("Get-started-button");
+    buttons[0].classList.add("Disabled");
+    buttons[1].classList.remove("Disabled");
+
+    ToggleNavbar();
+
+    return {
+      id: response.data.id,
+      age: response.data.age,
+      email: response.data.email,
+      gender_id: response.data.gender_id,
+      location: response.data.location,
+      name: response.data.name,
+      profile_picture: response.data.profile_picture
+    }
+  }
 }
 
 
