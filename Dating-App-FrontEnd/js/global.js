@@ -89,13 +89,12 @@ const ToggleNavbar = () => {
   }
 }
 
-const CheckUser = async (index_url, token, token_type) => {
+const CheckUser = async () => {
+  const index_url = baseurl + "auth/me";
+  const token = sessionStorage.getItem("token");
+  const token_type = sessionStorage.getItem("token_type");
   const response = await ExecutePostAPI(index_url, null, token, token_type);
   if(response != undefined){
-    const buttons = document.getElementsByClassName("Get-started-button");
-    buttons[0].classList.add("Disabled");
-    buttons[1].classList.remove("Disabled");
-
     ToggleNavbar();
 
     return {
@@ -107,7 +106,26 @@ const CheckUser = async (index_url, token, token_type) => {
       name: response.data.name,
       profile_picture: response.data.profile_picture
     }
+  }else{
+    return "Failed";
   }
+}
+
+const ChangeTheButton = (response) => {
+  if(response != "Failed"){
+    const buttons = document.getElementsByClassName("Get-started-button");
+    buttons[0].classList.add("Disabled");
+    buttons[1].classList.remove("Disabled");
+  }
+}
+
+const GetAllUsers = () => {
+  const getusers_url = baseurl + "getallusers/";
+  const response = ExecutePostAPI(getusers_url,)
+}
+
+const GetFilteredUsers = () => {
+
 }
 
 
@@ -142,12 +160,11 @@ const LoadLogin = () => {
 }
 
 const LoadIndex = async () => {
-  const index_url = baseurl + "auth/me";
-  const token = sessionStorage.getItem("token");
-  const token_type = sessionStorage.getItem("token_type");
-  await CheckUser(index_url, token, token_type);
+  const response = await CheckUser();
+  ChangeTheButton(response);
 }
 
-const LoadBrowse = () => {
-  ToggleNavbar();
+const LoadBrowse = async () => {
+  const {gender_id} = await CheckUser();
+  GetAllUsers();
 }
