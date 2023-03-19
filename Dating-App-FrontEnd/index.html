@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav id="Nav-without-user">
         <div class="Logo-block">
           <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
         </div>
@@ -20,13 +20,24 @@
           <li><a href="register.html">Sign up</a></li>
         </ul>
       </nav>
+      <nav id="Nav-with-user" class="Disabled">
+        <div class="Logo-block">
+          <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
+        </div>
+        <ul>
+          <li><a href="inbox.html"><i class="fas fa-inbox"></i></a></li>
+          <li><a href="notification.html"><i class="fas fa-bell"></i></a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+        </ul>
+      </nav>
     </header>
     <main>
       <section>
         <div class="Parallax">
           <h1 class="Parallax-title">Find your perfect match</h1>
           <div class="Get-started">
-            <a href="register.html">Get started</a>
+            <a href="register.html" class="Get-started">Get started</a>
+            <a href="browse.html"  class="Get-started Disabled">Start Looking</a>
           </div>
         </div>
       </section>
@@ -53,5 +64,10 @@
     </main>
 
     <script src="https://kit.fontawesome.com/fc8d13f77c.js" crossorigin="anonymous"></script>
+    <script src="js/axion.min.js"></script>
+    <script src="js/global.js"></script>
+    <script>
+      LoadIndex();
+    </script>
   </body>
 </html>

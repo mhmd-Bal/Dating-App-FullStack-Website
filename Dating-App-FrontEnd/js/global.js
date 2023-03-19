@@ -17,7 +17,7 @@ const ExecutePostAPI = async (api_url, api_data, api_token = null, api_token_typ
       api_url,
       api_data,
       {
-        Headers:{
+        headers:{
           'Content-Type' : 'application/json',
           'Accept' : 'application/json',
           'Authorization' : api_token_type + " " + api_token
@@ -64,7 +64,6 @@ const PostRegistrationData = async (event, register_url, profile_picture) => {
 }
 
 const PostLoginData = async (event, login_url) => {
-  console.log('hgello');
   event.preventDefault();
   const email = document.getElementById("Email").value;
   const password = document.getElementById("Password").value;
@@ -77,6 +76,11 @@ const PostLoginData = async (event, login_url) => {
   console.log(response);
   sessionStorage.setItem("token", response.data.access_token);
   sessionStorage.setItem("token_type", response.data.token_type);
+}
+
+const CheckUser = async (index_url, token, token_type) => {
+  const response = await ExecutePostAPI(index_url, null, token, token_type);
+  console.log(response);
 }
 
 
@@ -108,4 +112,11 @@ const LoadLogin = () => {
   const login_button = document.getElementById("Login-button");
 
   login_button.addEventListener("click", (event) => PostLoginData(event, login_url));
+}
+
+const LoadIndex = async () => {
+  const index_url = baseurl + "auth/me";
+  const token = sessionStorage.getItem("token");
+  const token_type = sessionStorage.getItem("token_type");
+  await CheckUser(index_url, token, token_type);
 }

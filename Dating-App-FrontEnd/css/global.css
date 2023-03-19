@@ -45,3 +45,7 @@ h5 {font-size: 1.25rem;}
 
 small, .text_small {font-size: 0.8rem;}
 .Extra_text_small {font-size: 0.2rem;}
+
+.Disabled{
+  display: none;
+}
