@@ -119,9 +119,61 @@ const ChangeTheButton = (response) => {
   }
 }
 
-const GetAllUsers = () => {
+const GetAllUsers = async (gender_id) => {
   const getusers_url = baseurl + "getallusers/";
-  const response = ExecutePostAPI(getusers_url,)
+  const data = new FormData();
+  data.append("gender_id", gender_id);
+  const response = await ExecutePostAPI(getusers_url, data);
+  console.log(response.data.users);
+  PrintUsers(response.data.users);
+}
+
+const PrintUsers = (users) => {
+  const users_block = document.getElementById("user-list");
+  for(let i=0; i<users.length; i++){
+    const users_section = document.createElement("div");
+    users_section.classList.add("user");
+    users_block.insertAdjacentElement("beforeend", users_section);
+
+    const users_information_section = document.createElement("div");
+    users_information_section.classList.add("user-info");
+    users_section.insertAdjacentElement("beforeend", users_information_section);
+    PrintUserInformations(users[i], users_information_section);
+
+    const users_actions_section = document.createElement("div");
+    users_actions_section.classList.add("user-actions");
+    users_section.insertAdjacentElement("beforeend", users_actions_section);
+    users_actions_section.innerHTML = `
+      <button class="favorite"><i class="far fa-heart"></i></button>
+      <button class="block"><i class="fas fa-ban"></i></button>
+      <button class="message"><i class="far fa-envelope"></i></button>
+    `
+    // PrintUserActions(users_actions_section);
+  }
+}
+
+const PrintUserActions = (users_actions_section) => {
+
+}
+
+const PrintUserInformations = (user, users_information_section) => {
+  const image= document.createElement("img");
+  const name = document.createElement("h3");
+  const age = document.createElement("p");
+  const email = document.createElement("p");
+  const location = document.createElement("p");
+
+  image.src = baseimageurl + user.profile_picture;
+  name.textContent = user.name;
+  age.textContent = user.age;
+  email.textContent = user.email;
+  location.textContent = user.location;
+
+  users_information_section.insertAdjacentElement("beforeend", image);
+  users_information_section.insertAdjacentElement("beforeend", name);
+  users_information_section.insertAdjacentElement("beforeend", age);
+  users_information_section.insertAdjacentElement("beforeend", email);
+  users_information_section.insertAdjacentElement("beforeend", location);
 }
 
 const GetFilteredUsers = () => {
@@ -166,5 +218,5 @@ const LoadIndex = async () => {
 
 const LoadBrowse = async () => {
   const {gender_id} = await CheckUser();
-  GetAllUsers();
+  GetAllUsers(2);
 }
