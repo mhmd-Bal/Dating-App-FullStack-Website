@@ -8,7 +8,7 @@ use Ramsey\Uuid\Type\Integer;
 
 class UserController extends Controller
 {
-    function GetAllUsers($var1 = 0, $var2 = 0, Request $request){
+    function GetAllUsers(Request $request, $var1 = 0, $var2 = 0){
         
         if($request->gender_id == 1){
             $gender_to_search = 2;
@@ -20,29 +20,32 @@ class UserController extends Controller
             if($var2 != 0){
                 $users = User::where("age", "=", $var1)
                             ->where("gender_id", "=", $gender_to_search)
-                            ->where("location", "=", $var2);
+                            ->where("location", "=", $var2)
+                            ->get();
                     return response()->json([
                         "users" => $users
                     ]);
             }else{
-                if(gettype($var1) == "integer"){
-                    $users = User::where("location", "=", $var1)
-                                ->where("gender_id", "=", $gender_to_search);
+                if(filter_var($var1, FILTER_VALIDATE_INT)){
+                    $users = User::where("age", "=", $var1)
+                                ->where("gender_id", "=", $gender_to_search)
+                                ->get();
                     return response()->json([
                         "users" => $users
                     ]);
                 }else{
-                    $users = User::where("age", "=", $var1)
-                                ->where("gender_id", "=", $gender_to_search);
+                    $users = User::where("location", "=", $var1)
+                                ->where("gender_id", "=", $gender_to_search)
+                                ->get();
                     return response()->json([
                         "users" => $users
                     ]);
                 }
             }
         }else{
-            $users = User::all();
+            $users = User::where("gender_id", "=", $gender_to_search)->get();
             return response()->json([
-                "status" => $users
+                "users" => $users
             ]);
         }
     }
