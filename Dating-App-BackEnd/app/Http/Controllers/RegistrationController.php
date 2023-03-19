@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RegistrationController extends Controller
 {
-    function register(Request $request) {
+    function Register(Request $request) {
         
         $email = $request->email;
         $user_exists = User::where('email', '=', $email)->count();
@@ -25,7 +25,6 @@ class RegistrationController extends Controller
             $decoded_profile_picture = base64_decode($profile_picture);
             $image_name = $email . "." . "jpg";
             Storage::disk('public')->put('profile_pictures/' . $image_name, $decoded_profile_picture);
-            
 
             $user = new User;
             $user->email = $request->email;        

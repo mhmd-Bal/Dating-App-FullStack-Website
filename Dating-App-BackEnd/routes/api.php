@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegistrationController;
 // use App\Http\Controllers\AuthController;
 
 /*
@@ -37,6 +38,6 @@ Route::group(['prefix' => 'v1'], function(){
     });
     
 
-    Route::post('/signup', [RegistrationController::class, "register"]);
-
+    Route::post('/signup', [RegistrationController::class, "Register"]);
+    Route::post('/getallusers/{var1?}/{var2?}', [UserController::class, "GetAllUsers"]);
 });

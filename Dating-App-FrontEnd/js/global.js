@@ -91,7 +91,6 @@ const ToggleNavbar = () => {
 
 const CheckUser = async (index_url, token, token_type) => {
   const response = await ExecutePostAPI(index_url, null, token, token_type);
-  console.log(response);
   if(response != undefined){
     const buttons = document.getElementsByClassName("Get-started-button");
     buttons[0].classList.add("Disabled");
@@ -147,4 +146,8 @@ const LoadIndex = async () => {
   const token = sessionStorage.getItem("token");
   const token_type = sessionStorage.getItem("token_type");
   await CheckUser(index_url, token, token_type);
+}
+
+const LoadBrowse = () => {
+  ToggleNavbar();
 }
