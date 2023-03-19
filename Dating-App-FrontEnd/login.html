@@ -22,17 +22,22 @@
     </nav>
   </header>
   <div class="Container">
-    <form class="Login-form" action="" method="post">
+    <form class="Login-form">
         <h1>Login</h1>
         <label for="Email">Email Address</label>
         <input type="email" name="Email" placeholder="Email" id="Email" required>
         <label for="Password">Password</label>
         <input type="password" name="Password" placeholder="Password" id="Password" required>
-        <button type="submit">Login</button>
+        <button id="Login-button">Login</button>
         <div class="Register-link">
             Don't have an account? <a href="register.html">Register here</a>
         </div>
     </form>
-</div>
+  </div>
+  <script src="js/axion.min.js"></script>
+  <script src="js/global.js"></script>
+  <script>
+    LoadLogin();
+  </script>
 </body>
 </html>

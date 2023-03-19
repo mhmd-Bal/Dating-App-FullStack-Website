@@ -23,8 +23,6 @@ class RegistrationController extends Controller
             $profile_picture = str_replace('data:image/jpeg;base64,', '', $profile_picture);
             $profile_picture = str_replace(' ', '+', $profile_picture);
             $decoded_profile_picture = base64_decode($profile_picture);
-
-            $name = $request->name;
             $image_name = $email . "." . "jpg";
             Storage::disk('public')->put('profile_pictures/' . $image_name, $decoded_profile_picture);
             
