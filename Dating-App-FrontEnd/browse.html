@@ -40,17 +40,10 @@
       <div class="filters">
         <form>
           <label for="age">Age:</label>
-          <input type="text" placeholder="ex: 20">
+          <input type="number" placeholder="ex: 20" id="age">
           <label for="location">Location:</label>
-          <select id="location" name="location">
-            <option value="all">All</option>
-            <option value="ny">New York</option>
-            <option value="la">Los Angeles</option>
-            <option value="chi">Chicago</option>
-            <option value="hou">Houston</option>
-            <option value="mia">Miami</option>
-          </select>
-          <button type="submit">Filter</button>
+          <input type="text" placeholder="ex: Beirut" id="location">
+          <button id="Filter-button">Filter</button>
         </form>
       </div>
       <div id="user-list">

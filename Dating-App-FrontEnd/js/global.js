@@ -124,7 +124,6 @@ const GetAllUsers = async (gender_id) => {
   const data = new FormData();
   data.append("gender_id", gender_id);
   const response = await ExecutePostAPI(getusers_url, data);
-  console.log(response.data.users);
   PrintUsers(response.data.users);
 }
 
@@ -152,10 +151,6 @@ const PrintUsers = (users) => {
   }
 }
 
-const PrintUserActions = (users_actions_section) => {
-
-}
-
 const PrintUserInformations = (user, users_information_section) => {
   const image= document.createElement("img");
   const name = document.createElement("h3");
@@ -176,8 +171,35 @@ const PrintUserInformations = (user, users_information_section) => {
   users_information_section.insertAdjacentElement("beforeend", location);
 }
 
-const GetFilteredUsers = () => {
+const GetFilteredUsers = async (event, gender_id) => {
+  event.preventDefault();
+  let getusers_url = "";
+  const age = document.getElementById("age").value;
+  const location = document.getElementById("location").value;
 
+  if(age != ""){
+    if(location != ""){
+      getusers_url += baseurl + `getallusers/${age}/${location}`;
+    }else{
+      getusers_url += baseurl + `getallusers/${age}`;
+    }
+  }else if(location != ""){
+    getusers_url += baseurl + `getallusers/${location}`;
+  }else{
+    getusers_url += baseurl + `getallusers/`;
+  }
+
+  if(getusers_url != ""){
+    const users_in_site = document.querySelectorAll(".user");
+    const data = new FormData();
+    data.append("gender_id", gender_id);
+    const response = await ExecutePostAPI(getusers_url, data);
+    users_in_site.forEach(user =>{
+      user.remove();
+    });
+    PrintUsers(response.data.users);
+  }
+  
 }
 
 
@@ -201,7 +223,6 @@ const LoadRegister = async () => {
   
 
   register_button.addEventListener("click", (event) => PostRegistrationData(event, register_url, profile_picture));
-
 }
 
 const LoadLogin = () => {
@@ -218,5 +239,7 @@ const LoadIndex = async () => {
 
 const LoadBrowse = async () => {
   const {gender_id} = await CheckUser();
-  GetAllUsers(2);
+  const filter_button = document.getElementById("Filter-button");
+  GetAllUsers(gender_id);
+  filter_button.addEventListener("click", (event) => GetFilteredUsers(event, gender_id));
 }
