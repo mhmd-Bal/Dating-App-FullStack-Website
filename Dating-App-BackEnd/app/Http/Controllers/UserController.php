@@ -143,4 +143,15 @@ class UserController extends Controller
             "blocks" => $blocks
         ]);
     }
+
+    function GetAllMessages(Request $request){
+        $receiver_id = $request->receiver_id;
+        $messages = Message::join("users", "messages.sender_id", "=", "users.id")
+                            ->select("messages.*", "users.name" )
+                            ->where("receiver_id", "=", $receiver_id)
+                            ->get();
+        return response()->json([
+            "messages" => $messages
+        ]);
+    }
 }
