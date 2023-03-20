@@ -244,6 +244,7 @@ const FavoriteUser = async (event, id) => {
   data.append("favorited_user_id",favorited_user_id);
 
   const response = await ExecutePostAPI(favorite_user_url, data);
+  alert(response.data.status);
 }
 
 const BlockUser = async (event, id) => {
@@ -257,11 +258,24 @@ const BlockUser = async (event, id) => {
   data.append("blocked_user_id",blocked_user_id);
 
   const response = await ExecutePostAPI(blocked_user_url, data);
-  console.log(response);
+  alert(response.data.status);
 }
 
-const MessageUser = (event, id) => {
-  console.log(event.currentTarget.id);
+const MessageUser = async (event, id) => {
+  const message_user_url = baseurl + "message";
+  let receiver_id_list = event.currentTarget.id;
+  receiver_id_list = receiver_id_list.split("-");
+  let receiver_id = +receiver_id_list[1];
+  let message = prompt("Write your message!");
+  if(message != null && message != "") {
+    const data = new FormData();
+    data.append("sender_id", id);
+    data.append("receiver_id",receiver_id);
+    data.append("message", message);
+  
+    const response = await ExecutePostAPI(message_user_url, data);
+    alert(response.data.status);
+  }
 }
 
 
