@@ -175,7 +175,7 @@ class UserController extends Controller
     }
 
     function EditProfile(Request $request){
-        $user_id = $request->id;
+        $user_id = $request->user_id;
         $user_info_exists = User_information::where('user_id', '=', $user_id)->count();
 
         if($user_info_exists > 0){
