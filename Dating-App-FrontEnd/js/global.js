@@ -381,6 +381,10 @@ const GetProfileBasicInfo = async (gender_id, id) => {
   PrintProfileBasicInfo(response.data.users[0]);
 }
 
+const ResetPassword = (id) => {
+  
+}
+
 
 // Page Functions
 
@@ -438,5 +442,7 @@ const LoadInbox = async () => {
 
 const LoadProfile = async () => {
   const {gender_id, id} = await CheckUser();
+  const reset_password_button = document.getElementById("reset-password-btn");
   GetProfileBasicInfo(gender_id, id);
+  reset_password_button.addEventListener("click", () => ResetPassword(id));
 }

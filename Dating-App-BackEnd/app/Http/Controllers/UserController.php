@@ -8,6 +8,7 @@ use App\Models\Message;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -158,6 +159,16 @@ class UserController extends Controller
                             ->get();
         return response()->json([
             "messages" => $messages
+        ]);
+    }
+
+    function ResetPassword(Request $request){
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json([
+            "status" => "Password Updated!"
         ]);
     }
 }
