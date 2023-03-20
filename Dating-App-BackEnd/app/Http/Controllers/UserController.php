@@ -192,7 +192,7 @@ class UserController extends Controller
             $additional_picture1 = str_replace('data:image/jpeg;base64,', '', $additional_picture1);
             $additional_picture1 = str_replace(' ', '+', $additional_picture1);
             $decoded_additional_picture1 = base64_decode($additional_picture1);
-            $image_name = $user_id . "." . "jpg";
+            $image_name = $user_id . "pic1" . "." . "jpg";
             Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture1);
             $user_info->additional_picture1 = 'additional_pictures/' . $image_name;
         }
@@ -201,18 +201,18 @@ class UserController extends Controller
             $additional_picture2 = str_replace('data:image/jpeg;base64,', '', $additional_picture2);
             $additional_picture2 = str_replace(' ', '+', $additional_picture2);
             $decoded_additional_picture2 = base64_decode($additional_picture2);
-            $image_name = $user_id . "." . "jpg";
+            $image_name = $user_id . "pic2" . "." . "jpg";
             Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture2);
             $user_info->additional_picture2 = 'additional_pictures/' . $image_name;
         }
         if(isset($request->additional_picture3)){
-            $additional_picture2 = $request->additional_picture2;
-            $additional_picture2 = str_replace('data:image/jpeg;base64,', '', $additional_picture2);
-            $additional_picture2 = str_replace(' ', '+', $additional_picture2);
-            $decoded_additional_picture2 = base64_decode($additional_picture2);
-            $image_name = $user_id . "." . "jpg";
-            Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture2);
-            $user_info->additional_picture2 = 'additional_pictures/' . $image_name;
+            $additional_picture3 = $request->additional_picture3;
+            $additional_picture3 = str_replace('data:image/jpeg;base64,', '', $additional_picture3);
+            $additional_picture3 = str_replace(' ', '+', $additional_picture3);
+            $decoded_additional_picture3 = base64_decode($additional_picture3);
+            $image_name = $user_id . "pic3" . "." . "jpg";
+            Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture3);
+            $user_info->additional_picture3 = 'additional_pictures/' . $image_name;
         }
         $user_info->user_id = $request->user_id;
         $user_info->save();
