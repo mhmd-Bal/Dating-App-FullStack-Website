@@ -278,6 +278,21 @@ const MessageUser = async (event, id) => {
   }
 }
 
+const GetAllNotifications = (id) => {
+
+}
+
+const GetAllFavorites = async (id) => {
+  const get_favorites_url = baseurl + "getallfavorites";
+  const favorited_user_id = id;
+  const favorites_section = document.getElementById("Favorites-section");
+
+  const data = new FormData();
+  data.append("favorited_user_id", favorited_user_id);
+  const response = await ExecutePostAPI(get_favorites_url, data);
+  console.log(response);
+}
+
 
 // Page Functions
 
@@ -324,5 +339,5 @@ const LoadBrowse = async () => {
 
 const LoadNotification = async () => {
   const {id} = await CheckUser();
-  const response = await ExecutePostAPI()
-}
+  GetAllFavorites(id);
+} 
