@@ -320,12 +320,36 @@ const PrintNotificationContents = (notification, notification_border, response) 
   if("favorites" in response.data){
     notification_contents.innerHTML = `
     <h3>${notification.name} Has Favorited You!</h3>
-    <p>${created_at[0]}</p>`
+    <p>${created_at[0]}</p>`;
   }else if("blocks" in response.data){
     notification_contents.innerHTML = `
     <h3>${notification.name} Has Blocked You!</h3>
-    <p>${created_at[0]}</p>`
+    <p>${created_at[0]}</p>`;
+  }else if("messages" in response.data){
+    notification_contents.innerHTML=`
+    <h2>${notification.name}</h2>
+    <p>${created_at[0]}</p>`;
+
+    const notification_body = document.createElement("div");
+    notification_body.classList.add("Notification-body");
+    notification_border.insertAdjacentElement("beforeend", notification_body);
+    
+    notification_body.innerHTML=`
+    <p>${notification.message}</p>
+    <button class="Reply-btn" id="msg-${notification.sender_ip}">Reply</button>`
   }
+}
+
+const GetAllMessages = async(id) => {
+  const get_messages_url = baseurl + "getallmessages";
+  const receiver_id = id;
+  const messages_section = document.getElementById("Messages-section");
+
+  const data = new FormData();
+  data.append("receiver_id", receiver_id);
+  const response = await ExecutePostAPI(get_messages_url, data);
+  console.log(response);
+  PrintNotifications(response.data.messages, messages_section, response);
 }
 
 
@@ -377,3 +401,8 @@ const LoadNotification = async () => {
   GetAllFavorites(id);
   GetAllBlocks(id);
 } 
+
+const LoadInbox = async () => {
+  const {id} = await CheckUser();
+  GetAllMessages(id);
+ }

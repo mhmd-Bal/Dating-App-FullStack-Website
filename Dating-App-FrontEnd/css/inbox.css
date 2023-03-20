@@ -5,7 +5,7 @@
   margin: 20px;
 }
 
-.Message {
+.Notification {
   border: 1px solid #ccc;
   border-radius: 10px;
   width: 90%;
@@ -16,7 +16,7 @@
   flex-direction: column;
 }
 
-.Message-header {
+.Notification-content {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -11,23 +11,33 @@
 </head>
 <body>
   <header>
-    <nav>
-      <div class="Logo-block">
+    <nav id="Nav-without-user">
+      <a class="Logo-block" href="index.html">
         <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
-      </div>
+      </a>
       <ul>
         <li><a href="login.html">Log in</a></li>
         <li><a href="register.html">Sign up</a></li>
       </ul>
     </nav>
+    <nav id="Nav-with-user" class="Disabled">
+      <a class="Logo-block" href="index.html">
+        <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
+      </a>
+      <ul>
+        <li><a href="inbox.html"><i class="fas fa-inbox"></i></a></li>
+        <li><a href="notification.html"><i class="fas fa-bell"></i></a></li>
+        <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+      </ul>
+    </nav>
   </header>
-  <div class="Container">
-    <div class="Message">
-      <div class="Message-header">
+  <div class="Container"  id="Messages-section">
+    <div class="Notification">
+      <div class="Notification-content">
         <h2>John Doe</h2>
         <p>2 hours ago</p>
       </div>
-      <div class="Message-body">
+      <div class="Notification-body">
         <p>
           Hey, how's it going? I saw your profile and thought we might have
           some things in common. Want to chat?
@@ -35,12 +45,12 @@
         <button class="Reply-btn">Reply</button>
       </div>
     </div>
-    <div class="Message">
-      <div class="Message-header">
+    <div class="Notification">
+      <div class="Notification-content">
         <h2>Jane Smith</h2>
         <p>1 day ago</p>
       </div>
-      <div class="Message-body">
+      <div class="Notification-body">
         <p>
           Hi there! I really liked your profile and wanted to say hello. What
           are some of your interests?
@@ -48,12 +58,12 @@
         <button class="Reply-btn">Reply</button>
       </div>
     </div>
-    <div class="Message">
-      <div class="Message-header">
+    <div class="Notification">
+      <div class="Notification-content">
         <h2>Bob Johnson</h2>
         <p>1 week ago</p>
       </div>
-      <div class="Message-body">
+      <div class="Notification-body">
         <p>
           Hey, I saw you're into hiking! Me too! Do you have any favorite
           trails?
@@ -63,5 +73,12 @@
     </div>
   </div>
 </div>
+
+<script src="https://kit.fontawesome.com/fc8d13f77c.js" crossorigin="anonymous"></script>
+<script src="js/axion.min.js"></script>
+    <script src="js/global.js"></script>
+    <script>
+      LoadInbox();
+    </script>
 </body>
 </html>
