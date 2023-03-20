@@ -40,4 +40,7 @@ Route::group(['prefix' => 'v1'], function(){
 
     Route::post('/signup', [RegistrationController::class, "Register"]);
     Route::post('/getallusers/{var1?}/{var2?}', [UserController::class, "GetAllUsers"]);
+    Route::post('/favorite', [UserController::class, "FavoriteUser"]);
+    Route::post('/block', [UserController::class, "BlockUser"]);
+    Route::post('/message', [UserController::class, "MessageUser"]);
 });

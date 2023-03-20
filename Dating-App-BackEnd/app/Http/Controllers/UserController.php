@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Block;
+use App\Models\Message;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
 
@@ -58,4 +61,30 @@ class UserController extends Controller
             }
         }
     }
+
+
+    function FavoriteUser(Request $request){
+        $user_who_favorited_id = $request->user_who_favorited_id;
+        $favorited_user_id = $request->favorited_user_id;
+
+        $favorite_exists = Favorite::where("user_who_favorited_id", "=", $user_who_favorited_id)
+                                    ->where("favorited_user_id", "=", $favorited_user_id)
+                                    ->count();
+
+        if($favorite_exists > 0){
+            return response()->json([
+                "status" => "Already Favorited!"
+            ]);
+        }else{
+            $favorite = new Favorite;
+            $favorite->user_who_favorited_id = $request->user_who_favorited_id;
+            $favorite->favorited_user_id = $request->favorited_user_id;
+            $favorite->save();
+            return response()->json([
+                "status" => "Favorited!"
+            ]);
+        }
+    }
+
+    
 }

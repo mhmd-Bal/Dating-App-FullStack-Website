@@ -119,17 +119,17 @@ const ChangeTheButton = (response) => {
   }
 }
 
-const GetAllUsers = async (gender_id) => {
+const GetAllUsers = async (gender_id, id) => {
   const getusers_url = baseurl + "getallusers/";
   const data = new FormData();
   data.append("gender_id", gender_id);
   const response = await ExecutePostAPI(getusers_url, data);
   console.log(response.data.users);
-  PrintUsers(response.data.users);
+  PrintUsers(response.data.users, id);
   
 }
 
-const PrintUsers = (users) => {
+const PrintUsers = (users, id) => {
   const users_block = document.getElementById("user-list");
   for(let i=0; i<users.length; i++){
     const users_section = document.createElement("div");
@@ -150,17 +150,17 @@ const PrintUsers = (users) => {
       <button class="message" id="msg-${users[i].id}"><i class="far fa-envelope"></i></button>
     `
   }
-  AssignActionButtons();
+  AssignActionButtons(id);
 }
 
-const AssignActionButtons = () => {
+const AssignActionButtons = (id) => {
   const fav_buttons = document.getElementsByClassName("favorite");
   const blc_buttons = document.getElementsByClassName("block");
   const msg_buttons = document.getElementsByClassName("message");
   for(let i=0; i<fav_buttons.length; i++){
-    fav_buttons[i].addEventListener("click", (event) => FavoriteUser(event));
-    blc_buttons[i].addEventListener("click", (event) => BlockUser(event));
-    msg_buttons[i].addEventListener("click", (event) => MessageUser(event));
+    fav_buttons[i].addEventListener("click", (event) => FavoriteUser(event, id));
+    blc_buttons[i].addEventListener("click", (event) => BlockUser(event, id));
+    msg_buttons[i].addEventListener("click", (event) => MessageUser(event, id));
   }
 }
 
@@ -185,7 +185,7 @@ const PrintUserInformations = (user, users_information_section) => {
   users_information_section.insertAdjacentElement("beforeend", location);
 }
 
-const GetFilteredUsers = async (event, gender_id) => {
+const GetFilteredUsers = async (event, gender_id, id) => {
   event.preventDefault();
   let getusers_url = "";
   const age = document.getElementById("age").value;
@@ -208,7 +208,7 @@ const GetFilteredUsers = async (event, gender_id) => {
     data.append("gender_id", gender_id);
     const response = await ExecutePostAPI(getusers_url, data);
     RemoveNotNeededUsers();
-    PrintUsers(response.data.users);
+    PrintUsers(response.data.users, id);
   }
 }
 
@@ -219,7 +219,7 @@ const RemoveNotNeededUsers = () => {
   });
 }
 
-const GetSearchedUsers = async (event, gender_id) => {
+const GetSearchedUsers = async (event, gender_id, id) => {
   event.preventDefault();
   let getusers_url = baseurl + `getallusers/`;
   const name = document.getElementById("name").value;
@@ -230,16 +230,16 @@ const GetSearchedUsers = async (event, gender_id) => {
   const response = await ExecutePostAPI(getusers_url, data);
   
   RemoveNotNeededUsers();
-  PrintUsers(response.data.users);
+  PrintUsers(response.data.users, id);
 }
 
-const FavoriteUser = (event) => {
+const FavoriteUser = (event, id) => {
   console.log(event.currentTarget.id);
 }
-const BlockUser = (event) => {
+const BlockUser = (event, id) => {
   console.log(event.currentTarget.id);
 }
-const MessageUser = (event) => {
+const MessageUser = (event, id) => {
   console.log(event.currentTarget.id);
 }
 
@@ -279,10 +279,10 @@ const LoadIndex = async () => {
 }
 
 const LoadBrowse = async () => {
-  const {gender_id} = await CheckUser();
+  const {gender_id, id} = await CheckUser();
   const filter_button = document.getElementById("Filter-button");
   const search_button = document.getElementById("Name-search-button");
   GetAllUsers(gender_id);
-  filter_button.addEventListener("click", (event) => GetFilteredUsers(event, gender_id));
-  search_button.addEventListener("click", (event) => GetSearchedUsers(event, gender_id));
+  filter_button.addEventListener("click", (event) => GetFilteredUsers(event, gender_id, id));
+  search_button.addEventListener("click", (event) => GetSearchedUsers(event, gender_id, id));
 }
