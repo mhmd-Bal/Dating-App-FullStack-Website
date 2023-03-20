@@ -371,6 +371,24 @@ const PrintProfileBasicInfo = async (user) => {
   location.innerHTML = `<strong>Location:</strong> ${user.location}`;
 }
 
+const PrintProfileExtraInfo = async (user_info) => {
+  const description = document.getElementById("description");
+  const additional_picture1 = document.getElementById("additional-picture1");
+  const additional_picture2 = document.getElementById("additional-picture2");
+  const additional_picture3 = document.getElementById("additional-picture3");
+
+  description.innerHTML = `${user_info.description}`;
+  if(user_info.additional_picture1 != null){
+    additional_picture1.src = baseimageurl + user_info.additional_picture1;
+  }
+  if(user_info.additional_picture2 != null){
+    additional_picture2.src = baseimageurl + user_info.additional_picture2;
+  }
+  if(user_info.additional_picture3 != null){
+    additional_picture3.src = baseimageurl + user_info.additional_picture3;
+  }
+}
+
 const GetProfileBasicInfo = async (gender_id, id) => {
   const getusers_url = baseurl + "getallusers/";
   const data = new FormData();
@@ -381,8 +399,13 @@ const GetProfileBasicInfo = async (gender_id, id) => {
   PrintProfileBasicInfo(response.data.users[0]);
 }
 
-const GetProfileExtraInfo = (user_id) => {
+const GetProfileExtraInfo = async (user_id) => {
   const get_user_info_url = baseurl + "getuserinfo/";
+  const data = new FormData();
+  data.append("user_id", user_id);
+  const response = await ExecutePostAPI(get_user_info_url, data);
+  console.log(response.data.user_info);
+  PrintProfileExtraInfo(response.data.user_info);
 }
 
 const ResetPassword = async (id) => {
