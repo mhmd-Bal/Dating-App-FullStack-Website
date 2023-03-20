@@ -405,6 +405,29 @@ const EncodeTheUploadedPicture = (additional_picture_input, additional_picture) 
   return additional_picture;
 }
 
+const EditProfileExtraInfo = async (event, edit_profile_url, user_id, additional_picture1, additional_picture2, additional_picture3) => {
+  event.preventDefault();
+  const description = document.getElementById("Description");
+
+  const data = new FormData();
+  data.append("user_id", user_id);
+  if(description != "" && description != null){
+    data.append("description", description);
+  }
+  if(additional_picture1 != ""){
+    data.append("additional_picture1", additional_picture1);
+  }
+  if(additional_picture2 != ""){
+    data.append("additional_picture2", additional_picture2);
+  }
+  if(additional_picture3 != ""){
+    data.append("additional_picture3", additional_picture3);
+  }
+
+  const response = await ExecutePostAPI(edit_profile_url, data);
+  console.log(response);
+}
+
 
 // Page Functions
 
@@ -469,16 +492,19 @@ const LoadProfile = async () => {
 
 const LoadEditProfile = async () => {
   const {id} = await CheckUser();
+  const edit_profile_url = baseurl + "editprofile";
+  const edit_button = document.getElementById("Edit-button");
 
   const additional_picture1_input = document.getElementById("Additional-picture1");
   let additional_picture1 = '';
-  const additional_picture2_input = document.getElementById("Additional-picture1");
+  const additional_picture2_input = document.getElementById("Additional-picture2");
   let additional_picture2 = '';
+  const additional_picture3_input = document.getElementById("Additional-picture3");
+  let additional_picture3 = '';
 
-  EncodeTheUploadedPicture(additional_picture_input, additional_picture)
+  EncodeTheUploadedPicture(additional_picture1_input, additional_picture1);
+  EncodeTheUploadedPicture(additional_picture2_input, additional_picture2);
+  EncodeTheUploadedPicture(additional_picture3_input, additional_picture3);
 
-
-
-
-
+  edit_button.addEventListener("click", (event) => EditProfileExtraInfo(event, edit_profile_url, id, additional_picture1, additional_picture2, additional_picture3))
 }
