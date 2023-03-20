@@ -190,16 +190,33 @@ const GetFilteredUsers = async (event, gender_id) => {
   }
 
   if(getusers_url != ""){
-    const users_in_site = document.querySelectorAll(".user");
     const data = new FormData();
     data.append("gender_id", gender_id);
     const response = await ExecutePostAPI(getusers_url, data);
-    users_in_site.forEach(user =>{
-      user.remove();
-    });
+    RemoveNotNeededUsers();
     PrintUsers(response.data.users);
   }
+}
+
+const RemoveNotNeededUsers = () => {
+  const users_in_site = document.querySelectorAll(".user");
+  users_in_site.forEach(user =>{
+    user.remove();
+  });
+}
+
+const GetSearchedUsers = async (event, gender_id) => {
+  event.preventDefault();
+  let getusers_url = baseurl + `getallusers/`;
+  const name = document.getElementById("name").value;
+
+  const data = new FormData();
+  data.append("gender_id", gender_id);
+  data.append("name", name);
+  const response = await ExecutePostAPI(getusers_url, data);
   
+  RemoveNotNeededUsers();
+  PrintUsers(response.data.users);
 }
 
 
@@ -240,6 +257,8 @@ const LoadIndex = async () => {
 const LoadBrowse = async () => {
   const {gender_id} = await CheckUser();
   const filter_button = document.getElementById("Filter-button");
+  const search_button = document.getElementById("Name-search-button");
   GetAllUsers(gender_id);
   filter_button.addEventListener("click", (event) => GetFilteredUsers(event, gender_id));
+  search_button.addEventListener("click", (event) => GetSearchedUsers(event, gender_id));
 }
