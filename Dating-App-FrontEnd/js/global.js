@@ -291,6 +291,27 @@ const GetAllFavorites = async (id) => {
   data.append("favorited_user_id", favorited_user_id);
   const response = await ExecutePostAPI(get_favorites_url, data);
   console.log(response);
+  PrintNotifications(response.data.favorites, favorites_section);
+}
+
+const PrintNotifications = (notification_list, notification_section) => {
+  for(let i=0; i<notification_list.length; i++){
+    let notification = document.createElement("div");
+    notification.classList.add("Notification");
+    notification_section.insertAdjacentElement("afterbegin", notification);
+    PrintNotificationContents(notification_list[i], notification);
+  }
+}
+
+const PrintNotificationContents = (notification, notification_border) => {
+  const notification_contents = document.createElement("div");
+  notification_contents.classList.add("Notification-content");
+  notification_border.insertAdjacentElement("beforeend", notification_contents);
+  const created_at_list = notification.created_at;
+  let created_at = created_at_list.split("T");
+  notification_contents.innerHTML = `
+  <h3>${notification.name} Has Blocked You!</h3>
+  <p>${created_at[0]}</p>`
 }
 
 
