@@ -47,4 +47,5 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('/getallblocks', [UserController::class, "GetAllBlocks"]);
     Route::post('/getallmessages', [UserController::class, "GetAllMessages"]);
     Route::post('/resetpassword' , [UserController::class, "ResetPassword"]);
+    Route::post('/editprofile' , [UserController::class, "EditProfile"]);
 });

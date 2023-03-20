@@ -8,7 +8,9 @@ use App\Models\Message;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
+use App\Models\User_information;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -169,6 +171,53 @@ class UserController extends Controller
 
         return response()->json([
             "status" => "Password Updated!"
+        ]);
+    }
+
+    function EditProfile(Request $request){
+        $user_id = $request->id;
+        $user_info_exists = User_information::where('user_id', '=', $user_id)->count();
+
+        if($user_info_exists > 0){
+            $user_info = User_information::find($user_id);
+        }else{
+            $user_info = new User_information;
+        }
+
+        if(isset($request->description)){
+            $user_info->description = $request->description;
+        }
+        if(isset($request->additional_picture1)){
+            $additional_picture1 = $request->additional_picture1;
+            $additional_picture1 = str_replace('data:image/jpeg;base64,', '', $additional_picture1);
+            $additional_picture1 = str_replace(' ', '+', $additional_picture1);
+            $decoded_additional_picture1 = base64_decode($additional_picture1);
+            $image_name = $user_id . "." . "jpg";
+            Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture1);
+            $user_info->additional_picture1 = 'additional_pictures/' . $image_name;
+        }
+        if(isset($request->additional_picture2)){
+            $additional_picture2 = $request->additional_picture2;
+            $additional_picture2 = str_replace('data:image/jpeg;base64,', '', $additional_picture2);
+            $additional_picture2 = str_replace(' ', '+', $additional_picture2);
+            $decoded_additional_picture2 = base64_decode($additional_picture2);
+            $image_name = $user_id . "." . "jpg";
+            Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture2);
+            $user_info->additional_picture2 = 'additional_pictures/' . $image_name;
+        }
+        if(isset($request->additional_picture3)){
+            $additional_picture2 = $request->additional_picture2;
+            $additional_picture2 = str_replace('data:image/jpeg;base64,', '', $additional_picture2);
+            $additional_picture2 = str_replace(' ', '+', $additional_picture2);
+            $decoded_additional_picture2 = base64_decode($additional_picture2);
+            $image_name = $user_id . "." . "jpg";
+            Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture2);
+            $user_info->additional_picture2 = 'additional_pictures/' . $image_name;
+        }
+        $user_info->save();
+
+        return response()->json([
+            "status" => "User Information Edited!"
         ]);
     }
 }
