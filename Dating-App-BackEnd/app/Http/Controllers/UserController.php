@@ -132,4 +132,15 @@ class UserController extends Controller
             "favorites" => $favorites
         ]);
     }
+
+    function GetAllBlocks(Request $request){
+        $blocked_user_id = $request->blocked_user_id;
+        $blocks = Block::join("users", "blocks.user_who_blocked_id", "=", "users.id")
+                            ->select("blocks.*", "users.name" )
+                            ->where("blocked_user_id", "=", $blocked_user_id)
+                            ->get();
+        return response()->json([
+            "blocks" => $blocks
+        ]);
+    }
 }
