@@ -124,7 +124,9 @@ const GetAllUsers = async (gender_id) => {
   const data = new FormData();
   data.append("gender_id", gender_id);
   const response = await ExecutePostAPI(getusers_url, data);
+  console.log(response.data.users);
   PrintUsers(response.data.users);
+  
 }
 
 const PrintUsers = (users) => {
@@ -143,13 +145,25 @@ const PrintUsers = (users) => {
     users_actions_section.classList.add("user-actions");
     users_section.insertAdjacentElement("beforeend", users_actions_section);
     users_actions_section.innerHTML = `
-      <button class="favorite"><i class="far fa-heart"></i></button>
-      <button class="block"><i class="fas fa-ban"></i></button>
-      <button class="message"><i class="far fa-envelope"></i></button>
+      <button class="favorite" id="fav-${users[i].id}"><i class="far fa-heart"></i></button>
+      <button class="block" id="blc-${users[i].id}"><i class="fas fa-ban"></i></button>
+      <button class="message" id="msg-${users[i].id}"><i class="far fa-envelope"></i></button>
     `
-    // PrintUserActions(users_actions_section);
+  }
+  AssignActionButtons();
+}
+
+const AssignActionButtons = () => {
+  const fav_buttons = document.getElementsByClassName("favorite");
+  const blc_buttons = document.getElementsByClassName("block");
+  const msg_buttons = document.getElementsByClassName("message");
+  for(let i=0; i<fav_buttons.length; i++){
+    fav_buttons[i].addEventListener("click", (event) => FavoriteUser(event));
+    blc_buttons[i].addEventListener("click", (event) => BlockUser(event));
+    msg_buttons[i].addEventListener("click", (event) => MessageUser(event));
   }
 }
+
 
 const PrintUserInformations = (user, users_information_section) => {
   const image= document.createElement("img");
@@ -217,6 +231,16 @@ const GetSearchedUsers = async (event, gender_id) => {
   
   RemoveNotNeededUsers();
   PrintUsers(response.data.users);
+}
+
+const FavoriteUser = (event) => {
+  console.log(event.currentTarget.id);
+}
+const BlockUser = (event) => {
+  console.log(event.currentTarget.id);
+}
+const MessageUser = (event) => {
+  console.log(event.currentTarget.id);
 }
 
 
