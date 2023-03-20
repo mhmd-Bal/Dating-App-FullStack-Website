@@ -278,8 +278,16 @@ const MessageUser = async (event, id) => {
   }
 }
 
-const GetAllNotifications = (id) => {
+const GetAllBlocks = async (id) => {
+  const get_blocks_url = baseurl + "getallblocks";
+  const blocked_user_id = id;
+  const blocks_section = document.getElementById("Blocks-section");
 
+  const data = new FormData();
+  data.append("blocked_user_id", blocked_user_id);
+  const response = await ExecutePostAPI(get_blocks_url, data);
+  console.log(response);
+  PrintNotifications(response.data.blocks, blocks_section, response);
 }
 
 const GetAllFavorites = async (id) => {
@@ -291,27 +299,33 @@ const GetAllFavorites = async (id) => {
   data.append("favorited_user_id", favorited_user_id);
   const response = await ExecutePostAPI(get_favorites_url, data);
   console.log(response);
-  PrintNotifications(response.data.favorites, favorites_section);
+  PrintNotifications(response.data.favorites, favorites_section, response);
 }
 
-const PrintNotifications = (notification_list, notification_section) => {
+const PrintNotifications = (notification_list, notification_section, response) => {
   for(let i=0; i<notification_list.length; i++){
     let notification = document.createElement("div");
     notification.classList.add("Notification");
     notification_section.insertAdjacentElement("afterbegin", notification);
-    PrintNotificationContents(notification_list[i], notification);
+    PrintNotificationContents(notification_list[i], notification, response);
   }
 }
 
-const PrintNotificationContents = (notification, notification_border) => {
+const PrintNotificationContents = (notification, notification_border, response) => {
   const notification_contents = document.createElement("div");
   notification_contents.classList.add("Notification-content");
   notification_border.insertAdjacentElement("beforeend", notification_contents);
   const created_at_list = notification.created_at;
   let created_at = created_at_list.split("T");
-  notification_contents.innerHTML = `
-  <h3>${notification.name} Has Blocked You!</h3>
-  <p>${created_at[0]}</p>`
+  if("favorites" in response.data){
+    notification_contents.innerHTML = `
+    <h3>${notification.name} Has Favorited You!</h3>
+    <p>${created_at[0]}</p>`
+  }else if("blocks" in response.data){
+    notification_contents.innerHTML = `
+    <h3>${notification.name} Has Blocked You!</h3>
+    <p>${created_at[0]}</p>`
+  }
 }
 
 
@@ -361,4 +375,5 @@ const LoadBrowse = async () => {
 const LoadNotification = async () => {
   const {id} = await CheckUser();
   GetAllFavorites(id);
+  GetAllBlocks(id);
 } 
