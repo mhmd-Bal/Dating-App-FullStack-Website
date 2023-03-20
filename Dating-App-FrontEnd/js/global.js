@@ -324,4 +324,5 @@ const LoadBrowse = async () => {
 
 const LoadNotification = async () => {
   const {id} = await CheckUser();
+  const response = await ExecutePostAPI()
 }

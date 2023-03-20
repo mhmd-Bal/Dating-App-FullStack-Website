@@ -123,8 +123,11 @@ class UserController extends Controller
     }
 
     function GetAllFavorites(Request $request){
-        $receiver_id = $request->receiver_id;
-        $favorites = Favorite::where("receiver_id", "=", $receiver_id)->get();
+        $favorited_user_id = $request->favorited_user_id;
+        $favorites = Favorite::join("users", "favorites.user_who_favorited_id", "=", "users.id")
+                            ->select("favorites.*", "users.name" )
+                            ->where("favorited_user_id", "=", $favorited_user_id)
+                            ->get();
         return response()->json([
             "favorites" => $favorites
         ]);
