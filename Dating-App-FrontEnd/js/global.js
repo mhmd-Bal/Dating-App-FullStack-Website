@@ -393,21 +393,22 @@ const ResetPassword = async (id) => {
   }
 }
 
-const EncodeTheUploadedPicture = (additional_picture_input, additional_picture) => {
-  additional_picture_input.addEventListener("change", function(){
-    const reader = new FileReader();
-    reader.addEventListener("load",() => {
-      additional_picture = reader.result;
-      console.log(profile_picture); 
-    });
-    reader.readAsDataURL(this.files[0]);
-  });
-  return additional_picture;
-}
+// const EncodeTheUploadedPicture = (additional_picture_input, additional_picture) => {
+//   additional_picture = "";
+//   additional_picture_input.addEventListener("change", function(){
+//     const reader = new FileReader();
+//     reader.addEventListener("load",() => {
+//       additional_picture = reader.result;
+//     });
+//     reader.readAsDataURL(this.files[0]);
+//   });
+//   console.log(additional_picture);
+//   return additional_picture;
+// }
 
 const EditProfileExtraInfo = async (event, edit_profile_url, user_id, additional_picture1, additional_picture2, additional_picture3) => {
   event.preventDefault();
-  const description = document.getElementById("Description");
+  const description = document.getElementById("Description").value;
 
   const data = new FormData();
   data.append("user_id", user_id);
@@ -416,12 +417,15 @@ const EditProfileExtraInfo = async (event, edit_profile_url, user_id, additional
   }
   if(additional_picture1 != ""){
     data.append("additional_picture1", additional_picture1);
+    console.log(additional_picture1);
   }
   if(additional_picture2 != ""){
     data.append("additional_picture2", additional_picture2);
+    console.log(additional_picture2);
   }
   if(additional_picture3 != ""){
     data.append("additional_picture3", additional_picture3);
+    console.log(additional_picture3);
   }
 
   const response = await ExecutePostAPI(edit_profile_url, data);
@@ -502,9 +506,34 @@ const LoadEditProfile = async () => {
   const additional_picture3_input = document.getElementById("Additional-picture3");
   let additional_picture3 = '';
 
-  EncodeTheUploadedPicture(additional_picture1_input, additional_picture1);
-  EncodeTheUploadedPicture(additional_picture2_input, additional_picture2);
-  EncodeTheUploadedPicture(additional_picture3_input, additional_picture3);
+  // EncodeTheUploadedPicture(additional_picture1_input, additional_picture1);
+  // EncodeTheUploadedPicture(additional_picture2_input, additional_picture2);
+  // EncodeTheUploadedPicture(additional_picture3_input, additional_picture3);
+
+  additional_picture1_input.addEventListener("change", function(){
+    const reader = new FileReader();
+    reader.addEventListener("load",() => {
+      additional_picture1 = reader.result;
+    });
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  additional_picture2_input.addEventListener("change", function(){
+    const reader = new FileReader();
+    reader.addEventListener("load",() => {
+      additional_picture2 = reader.result;
+    });
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  additional_picture3_input.addEventListener("change", function(){
+    const reader = new FileReader();
+    reader.addEventListener("load",() => {
+      additional_picture3 = reader.result;
+    });
+    reader.readAsDataURL(this.files[0]);
+  });
+
 
   edit_button.addEventListener("click", (event) => EditProfileExtraInfo(event, edit_profile_url, id, additional_picture1, additional_picture2, additional_picture3))
 }

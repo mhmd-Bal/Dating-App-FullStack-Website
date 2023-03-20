@@ -214,6 +214,7 @@ class UserController extends Controller
             Storage::disk('public')->put('additional_pictures/' . $image_name, $decoded_additional_picture2);
             $user_info->additional_picture2 = 'additional_pictures/' . $image_name;
         }
+        $user_info->user_id = $request->user_id;
         $user_info->save();
 
         return response()->json([
