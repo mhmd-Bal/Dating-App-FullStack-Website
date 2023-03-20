@@ -31,14 +31,14 @@
   padding: 8px;
   border-radius: 5px;
   border: none;
-  background-color: #008CBA;
+  background-color: var(--Primary_red);
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .filters button:hover {
-  background-color: #006D8C;
+  background-color: var(--Primary_orange);
 }
 
 

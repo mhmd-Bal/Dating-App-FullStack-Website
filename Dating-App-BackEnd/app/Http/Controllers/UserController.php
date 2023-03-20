@@ -43,10 +43,19 @@ class UserController extends Controller
                 }
             }
         }else{
-            $users = User::where("gender_id", "=", $gender_to_search)->get();
-            return response()->json([
-                "users" => $users
-            ]);
+            if(isset($request->name)){
+                $users = User::where("gender_id", "=", $gender_to_search)
+                            ->where("name", "like", "%".$request->name."%")
+                            ->get();
+                return response()->json([
+                    "users" => $users
+                ]);
+            }else{
+                $users = User::where("gender_id", "=", $gender_to_search)->get();
+                return response()->json([
+                    "users" => $users
+                ]);
+            }
         }
     }
 }
