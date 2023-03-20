@@ -244,11 +244,22 @@ const FavoriteUser = async (event, id) => {
   data.append("favorited_user_id",favorited_user_id);
 
   const response = await ExecutePostAPI(favorite_user_url, data);
+}
+
+const BlockUser = async (event, id) => {
+  const blocked_user_url = baseurl + "block";
+  let blocked_user_id_list = event.currentTarget.id;
+  blocked_user_id_list = blocked_user_id_list.split("-");
+  let blocked_user_id = +blocked_user_id_list[1];
+
+  const data = new FormData();
+  data.append("user_who_blocked_id", id);
+  data.append("blocked_user_id",blocked_user_id);
+
+  const response = await ExecutePostAPI(blocked_user_url, data);
   console.log(response);
 }
-const BlockUser = (event, id) => {
-  console.log(event.currentTarget.id);
-}
+
 const MessageUser = (event, id) => {
   console.log(event.currentTarget.id);
 }
