@@ -43,4 +43,7 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('/favorite', [UserController::class, "FavoriteUser"]);
     Route::post('/block', [UserController::class, "BlockUser"]);
     Route::post('/message', [UserController::class, "MessageUser"]);
+    Route::post('/getallfavorites', [UserController::class, "GetAllFavorites"]);
+    Route::post('/getallblocks', [UserController::class, "GetAllBlocks"]);
+    Route::post('/getallmessages', [UserController::class, "GetAllMessages"]);
 });

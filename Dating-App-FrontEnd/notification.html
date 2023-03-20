@@ -11,13 +11,23 @@
 </head>
 <body>
   <header>
-    <nav>
-      <div class="Logo-block">
+    <nav id="Nav-without-user">
+      <a class="Logo-block" href="index.html">
         <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
-      </div>
+      </a>
       <ul>
         <li><a href="login.html">Log in</a></li>
         <li><a href="register.html">Sign up</a></li>
+      </ul>
+    </nav>
+    <nav id="Nav-with-user" class="Disabled">
+      <a class="Logo-block" href="index.html">
+        <img src="images/Tinder-logo.png" alt="Logo" class="Logo" />
+      </a>
+      <ul>
+        <li><a href="inbox.html"><i class="fas fa-inbox"></i></a></li>
+        <li><a href="notification.html"><i class="fas fa-bell"></i></a></li>
+        <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
       </ul>
     </nav>
   </header>
@@ -36,5 +46,11 @@
     </div>
   </div>
 </div>
+<script src="https://kit.fontawesome.com/fc8d13f77c.js" crossorigin="anonymous"></script>
+<script src="js/axion.min.js"></script>
+    <script src="js/global.js"></script>
+    <script>
+      LoadNotification();
+    </script>
 </body>
 </html>

@@ -121,4 +121,12 @@ class UserController extends Controller
         ]);
         
     }
+
+    function GetAllFavorites(Request $request){
+        $receiver_id = $request->receiver_id;
+        $favorites = Favorite::where("receiver_id", "=", $receiver_id)->get();
+        return response()->json([
+            "favorites" => $favorites
+        ]);
+    }
 }

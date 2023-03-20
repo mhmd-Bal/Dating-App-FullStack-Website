@@ -321,3 +321,7 @@ const LoadBrowse = async () => {
   filter_button.addEventListener("click", (event) => GetFilteredUsers(event, gender_id, id));
   search_button.addEventListener("click", (event) => GetSearchedUsers(event, gender_id, id));
 }
+
+const LoadNotification = async () => {
+  const {id} = await CheckUser();
+}
