@@ -233,8 +233,18 @@ const GetSearchedUsers = async (event, gender_id, id) => {
   PrintUsers(response.data.users, id);
 }
 
-const FavoriteUser = (event, id) => {
-  console.log(event.currentTarget.id);
+const FavoriteUser = async (event, id) => {
+  const favorite_user_url = baseurl + "favorite";
+  let favorited_user_id_list = event.currentTarget.id;
+  favorited_user_id_list = favorited_user_id_list.split("-");
+  let favorited_user_id = +favorited_user_id_list[1];
+
+  const data = new FormData();
+  data.append("user_who_favorited_id", id);
+  data.append("favorited_user_id",favorited_user_id);
+
+  const response = await ExecutePostAPI(favorite_user_url, data);
+  console.log(response);
 }
 const BlockUser = (event, id) => {
   console.log(event.currentTarget.id);
@@ -282,7 +292,7 @@ const LoadBrowse = async () => {
   const {gender_id, id} = await CheckUser();
   const filter_button = document.getElementById("Filter-button");
   const search_button = document.getElementById("Name-search-button");
-  GetAllUsers(gender_id);
+  GetAllUsers(gender_id, id);
   filter_button.addEventListener("click", (event) => GetFilteredUsers(event, gender_id, id));
   search_button.addEventListener("click", (event) => GetSearchedUsers(event, gender_id, id));
 }
