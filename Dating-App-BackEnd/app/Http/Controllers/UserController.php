@@ -109,4 +109,16 @@ class UserController extends Controller
         }
     }
 
+    function MessageUser(Request $request){
+        $message = new Message;
+        $message->receiver_id = $request->receiver_id;
+        $message->sender_id = $request->sender_id;
+        $message->message = $request->message;
+        $message->save();
+
+        return response()->json([
+            "status" => "Message Sent!"
+        ]);
+        
+    }
 }
