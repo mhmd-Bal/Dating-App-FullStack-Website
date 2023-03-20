@@ -457,6 +457,15 @@ const EditProfileExtraInfo = async (event, edit_profile_url, user_id, additional
   window.location.href = "profile.html";
 }
 
+const Logout = async () => {
+  const reset_password_url = baseurl + "auth/logout";
+  const response = await ExecutePostAPI(reset_password_url, null);
+  sessionStorage.removeItem("token");
+  sessionStorage.removeItem("token_type");
+
+  window.location.href= "index.html";
+}
+
 
 // Page Functions
 
