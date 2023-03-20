@@ -393,6 +393,18 @@ const ResetPassword = async (id) => {
   }
 }
 
+const EncodeTheUploadedPicture = (additional_picture_input, additional_picture) => {
+  additional_picture_input.addEventListener("change", function(){
+    const reader = new FileReader();
+    reader.addEventListener("load",() => {
+      additional_picture = reader.result;
+      console.log(profile_picture); 
+    });
+    reader.readAsDataURL(this.files[0]);
+  });
+  return additional_picture;
+}
+
 
 // Page Functions
 
@@ -456,5 +468,17 @@ const LoadProfile = async () => {
 }
 
 const LoadEditProfile = async () => {
-  const {gender_id, id} = await CheckUser();
+  const {id} = await CheckUser();
+
+  const additional_picture1_input = document.getElementById("Additional-picture1");
+  let additional_picture1 = '';
+  const additional_picture2_input = document.getElementById("Additional-picture1");
+  let additional_picture2 = '';
+
+  EncodeTheUploadedPicture(additional_picture_input, additional_picture)
+
+
+
+
+
 }

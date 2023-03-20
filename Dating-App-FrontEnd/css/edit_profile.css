@@ -35,6 +35,7 @@
   background-color: var(--Primary_red);
   color: #fff;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .Edit-profile-form button:hover {
