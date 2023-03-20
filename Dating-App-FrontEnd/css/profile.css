@@ -36,7 +36,7 @@
   flex-direction: column;
 }
 
-.edit-profile-btn {
+.profile-btns {
   background-color: var(--Primary_red);
   color: #fff;
   border: none;
@@ -47,7 +47,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.edit-profile-btn:hover {
+.profile-btns:hover {
   background-color: var(--Primary_orange);
 }
 

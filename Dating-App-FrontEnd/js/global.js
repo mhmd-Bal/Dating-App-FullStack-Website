@@ -357,6 +357,30 @@ const GetAllMessages = async(id) => {
   PrintNotifications(response.data.messages, messages_section, response, id);
 }
 
+const PrintProfileBasicInfo = async (user) => {
+  const profile_picture = document.getElementById("Profile-picture");
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const age = document.getElementById("age");
+  const location = document.getElementById("location");
+
+  profile_picture.src = baseimageurl + user.profile_picture;
+  name.innerHTML = `${user.name}`;
+  email.innerHTML = `<strong>Email:</strong> ${user.email}`;
+  age.innerHTML = `<strong>Age:</strong> ${user.age}`;
+  location.innerHTML = `<strong>Location:</strong> ${user.location}`;
+}
+
+const GetProfileBasicInfo = async (gender_id, id) => {
+  const getusers_url = baseurl + "getallusers/";
+  const data = new FormData();
+  data.append("gender_id", gender_id);
+  data.append("id", id);
+  const response = await ExecutePostAPI(getusers_url, data);
+  console.log(response.data.users[0]);
+  PrintProfileBasicInfo(response.data.users[0]);
+}
+
 
 // Page Functions
 
@@ -410,4 +434,9 @@ const LoadNotification = async () => {
 const LoadInbox = async () => {
   const {id} = await CheckUser();
   GetAllMessages(id);
- }
+}
+
+const LoadProfile = async () => {
+  const {gender_id, id} = await CheckUser();
+  GetProfileBasicInfo(gender_id, id);
+}

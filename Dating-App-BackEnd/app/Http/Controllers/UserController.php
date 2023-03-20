@@ -53,6 +53,12 @@ class UserController extends Controller
                 return response()->json([
                     "users" => $users
                 ]);
+            }else if(isset($request->id)){
+                $users = User::where("id", "=", $request->id)
+                            ->get();
+                return response()->json([
+                    "users" => $users
+                ]);
             }else{
                 $users = User::where("gender_id", "=", $gender_to_search)->get();
                 return response()->json([
