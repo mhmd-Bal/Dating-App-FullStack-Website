@@ -381,6 +381,10 @@ const GetProfileBasicInfo = async (gender_id, id) => {
   PrintProfileBasicInfo(response.data.users[0]);
 }
 
+const GetProfileExtraInfo = (user_id) => {
+  const get_user_info_url = baseurl + "getuserinfo/";
+}
+
 const ResetPassword = async (id) => {
   const reset_password_url = baseurl + "resetpassword/";
   let password = prompt("Give the new password:");
@@ -417,19 +421,17 @@ const EditProfileExtraInfo = async (event, edit_profile_url, user_id, additional
   }
   if(additional_picture1 != ""){
     data.append("additional_picture1", additional_picture1);
-    console.log(additional_picture1);
   }
   if(additional_picture2 != ""){
     data.append("additional_picture2", additional_picture2);
-    console.log(additional_picture2);
   }
   if(additional_picture3 != ""){
     data.append("additional_picture3", additional_picture3);
-    console.log(additional_picture3);
   }
 
   const response = await ExecutePostAPI(edit_profile_url, data);
-  console.log(response);
+  alert(response.data.status);
+  window.location.href = "profile.html";
 }
 
 
@@ -491,6 +493,7 @@ const LoadProfile = async () => {
   const {gender_id, id} = await CheckUser();
   const reset_password_button = document.getElementById("reset-password-btn");
   GetProfileBasicInfo(gender_id, id);
+  GetProfileExtraInfo(id);
   reset_password_button.addEventListener("click", () => ResetPassword(id));
 }
 

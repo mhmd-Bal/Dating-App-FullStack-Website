@@ -221,4 +221,12 @@ class UserController extends Controller
             "status" => "User Information Edited!"
         ]);
     }
+
+    function GetUserInfo(Request $request) {
+        $user_info = User_information::find($request->user_id);
+        $user_info->save();
+        return response()->json([
+            "user_info" => $user_info
+        ]);
+    }
 }
