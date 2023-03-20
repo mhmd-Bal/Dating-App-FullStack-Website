@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_informations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->longText("description")->nullable();
             $table->string("additional_picture1")->nullable();
             $table->string("additional_picture2")->nullable();

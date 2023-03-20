@@ -381,8 +381,14 @@ const GetProfileBasicInfo = async (gender_id, id) => {
   PrintProfileBasicInfo(response.data.users[0]);
 }
 
-const ResetPassword = (id) => {
-  
+const ResetPassword = async (id) => {
+  const reset_password_url = baseurl + "resetpassword/";
+  let password = prompt("Give the new password:");
+  const data = new FormData();
+  data.append("password", password);
+  data.append("id", id);
+  const response = await ExecutePostAPI(reset_password_url, data);
+  alert(response.data.status);
 }
 
 
@@ -445,4 +451,8 @@ const LoadProfile = async () => {
   const reset_password_button = document.getElementById("reset-password-btn");
   GetProfileBasicInfo(gender_id, id);
   reset_password_button.addEventListener("click", () => ResetPassword(id));
+}
+
+const LoadEditProfile = async () => {
+  const {gender_id, id} = await CheckUser();
 }

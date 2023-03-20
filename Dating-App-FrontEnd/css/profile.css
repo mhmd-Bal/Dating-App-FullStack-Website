@@ -87,3 +87,8 @@
 .pictures-container img{
   width: 30%;
 }
+
+button a{
+  text-decoration: none;
+  color: white;
+}
