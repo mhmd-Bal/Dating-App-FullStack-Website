@@ -86,5 +86,27 @@ class UserController extends Controller
         }
     }
 
-    
+    function BlockUser(Request $request){
+        $user_who_blocked_id = $request->user_who_blocked_id;
+        $blocked_user_id = $request->blocked_user_id;
+
+        $block_exists = Block::where("user_who_blocked_id", "=", $user_who_blocked_id)
+                                ->where("blocked_user_id", "=", $blocked_user_id)
+                                ->count();
+
+        if($block_exists > 0){
+            return response()->json([
+                "status" => "Already Blocked!"
+            ]);
+        }else{
+            $block = new Block;
+            $block->user_who_blocked_id = $request->user_who_blocked_id;
+            $block->blocked_user_id = $request->blocked_user_id;
+            $block->save();
+            return response()->json([
+                "status" => "Blocked!"
+            ]);
+        }
+    }
+
 }
