@@ -286,8 +286,7 @@ const GetAllBlocks = async (id) => {
   const data = new FormData();
   data.append("blocked_user_id", blocked_user_id);
   const response = await ExecutePostAPI(get_blocks_url, data);
-  console.log(response);
-  PrintNotifications(response.data.blocks, blocks_section, response);
+  PrintNotifications(response.data.blocks, blocks_section, response, id);
 }
 
 const GetAllFavorites = async (id) => {
@@ -298,20 +297,19 @@ const GetAllFavorites = async (id) => {
   const data = new FormData();
   data.append("favorited_user_id", favorited_user_id);
   const response = await ExecutePostAPI(get_favorites_url, data);
-  console.log(response);
-  PrintNotifications(response.data.favorites, favorites_section, response);
+  PrintNotifications(response.data.favorites, favorites_section, response, id);
 }
 
-const PrintNotifications = (notification_list, notification_section, response) => {
+const PrintNotifications = (notification_list, notification_section, response, id) => {
   for(let i=0; i<notification_list.length; i++){
     let notification = document.createElement("div");
     notification.classList.add("Notification");
     notification_section.insertAdjacentElement("afterbegin", notification);
-    PrintNotificationContents(notification_list[i], notification, response);
+    PrintNotificationContents(notification_list[i], notification, response, id);
   }
 }
 
-const PrintNotificationContents = (notification, notification_border, response) => {
+const PrintNotificationContents = (notification, notification_border, response, id) => {
   const notification_contents = document.createElement("div");
   notification_contents.classList.add("Notification-content");
   notification_border.insertAdjacentElement("beforeend", notification_contents);
@@ -336,7 +334,15 @@ const PrintNotificationContents = (notification, notification_border, response) 
     
     notification_body.innerHTML=`
     <p>${notification.message}</p>
-    <button class="Reply-btn" id="msg-${notification.sender_ip}">Reply</button>`
+    <button class="Reply-btn" id="msg-${notification.sender_id}">Reply</button>`
+    AssignReplyButton(id);
+  }
+}
+
+const AssignReplyButton = (id) => {
+  const reply_buttons = document.getElementsByClassName("Reply-btn");
+  for(let i=0; i<reply_buttons.length; i++){
+    reply_buttons[i].addEventListener("click", (event) => MessageUser(event, id));
   }
 }
 
@@ -348,8 +354,7 @@ const GetAllMessages = async(id) => {
   const data = new FormData();
   data.append("receiver_id", receiver_id);
   const response = await ExecutePostAPI(get_messages_url, data);
-  console.log(response);
-  PrintNotifications(response.data.messages, messages_section, response);
+  PrintNotifications(response.data.messages, messages_section, response, id);
 }
 
 
