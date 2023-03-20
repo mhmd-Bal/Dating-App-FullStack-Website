@@ -388,7 +388,9 @@ const ResetPassword = async (id) => {
   data.append("password", password);
   data.append("id", id);
   const response = await ExecutePostAPI(reset_password_url, data);
-  alert(response.data.status);
+  if(password != null && password != ""){
+    alert(response.data.status);
+  }
 }
 
 
