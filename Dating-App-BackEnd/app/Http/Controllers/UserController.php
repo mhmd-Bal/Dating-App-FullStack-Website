@@ -78,7 +78,7 @@ class UserController extends Controller
 
         $favorite_exists = Favorite::where("user_who_favorited_id", "=", $user_who_favorited_id)
                                     ->where("favorited_user_id", "=", $favorited_user_id)
-                                    ->count();
+                                    ->count(); // or use first();
 
         if($favorite_exists > 0){
             return response()->json([
@@ -115,6 +115,15 @@ class UserController extends Controller
             return response()->json([
                 "status" => "Blocked!"
             ]);
+            // $insert_block = Block::insert([
+            //     "user_who_blocked_id" => $request->user_who_blocked_id,
+            //     "blocked_user_id" => $request->blocked_user_id
+            // ]);
+            // $update_block = Block::where()->first();
+            // $update_block->update([
+
+            // ]);
+            
         }
     }
 
