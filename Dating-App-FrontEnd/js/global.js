@@ -373,20 +373,25 @@ const PrintProfileBasicInfo = async (user) => {
 
 const PrintProfileExtraInfo = async (user_info) => {
   const description = document.getElementById("description");
-  const additional_picture1 = document.getElementById("additional-picture1");
-  const additional_picture2 = document.getElementById("additional-picture2");
-  const additional_picture3 = document.getElementById("additional-picture3");
+  const pictures_container = document.getElementById("pictures-container");
 
   description.innerHTML = `${user_info.description}`;
   if(user_info.additional_picture1 != null){
+    const additional_picture1 = document.createElement("img");
     additional_picture1.src = baseimageurl + user_info.additional_picture1;
+    pictures_container.insertAdjacentElement("beforeend", additional_picture1);
   }
   if(user_info.additional_picture2 != null){
+    const additional_picture2 = document.createElement("img");
     additional_picture2.src = baseimageurl + user_info.additional_picture2;
+    pictures_container.insertAdjacentElement("beforeend", additional_picture2);
   }
   if(user_info.additional_picture3 != null){
+    const additional_picture3 = document.createElement("img");
     additional_picture3.src = baseimageurl + user_info.additional_picture3;
+    pictures_container.insertAdjacentElement("beforeend", additional_picture3);
   }
+
 }
 
 const GetProfileBasicInfo = async (gender_id, id) => {
